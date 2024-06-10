@@ -2,7 +2,7 @@
 
 <img src="https://img.shields.io/badge/STATUS-FINALIZADO-green" display="inline" >
 
-Mi objetivo con este challenge es implementar una API REST con las siguientes funcionalidades:
+Mi objetivo con este challenge fue implementar una API REST con las siguientes funcionalidades:
 - API con rutas implementadas siguiendo las mejores prácticas del modelo REST;
 - Validaciones realizadas según las reglas de negocio;
 - Implementación de una base de datos relacional para la persistencia de la información;
