@@ -7,3 +7,5 @@ Mi objetivo con este challenge fue implementar una API REST con las siguientes f
 - Validaciones realizadas según las reglas de negocio;
 - Implementación de una base de datos relacional para la persistencia de la información;
 - Servicio de autenticación/autorización para restringir el acceso a la información.
+
+![Captura de pantalla 1](https://github.com/adore1968/forohub_challenge/assets/101434158/f1e8f508-633a-4822-a57d-57d13187ff0f)
