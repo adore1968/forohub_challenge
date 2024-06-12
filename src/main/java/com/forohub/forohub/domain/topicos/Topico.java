@@ -1,6 +1,8 @@
 package com.forohub.forohub.domain.topicos;
 
+import com.forohub.forohub.domain.autores.Autor;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,25 +23,32 @@ public class Topico {
     private String titulo;
     private String mensaje;
     private LocalDateTime fecha;
-    private String status;
-    private String autor;
-    private String curso;
+    @Enumerated(EnumType.STRING)
+    private Estado status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Autor autor;
+    @Column(name = "nombre_curso")
+    private String nombreCurso;
 
-    public Topico(DatosRegistroTopico datosRegistroTopico) {
-        this.titulo = datosRegistroTopico.titulo();
-        this.mensaje = datosRegistroTopico.mensaje();
-        this.autor = datosRegistroTopico.autor();
-        this.curso = datosRegistroTopico.curso();
-        this.fecha = datosRegistroTopico.fecha();
-        this.status = datosRegistroTopico.status();
+    public Topico(String titulo, String mensaje, LocalDateTime fecha, Estado status, Autor autor, String nombreCurso) {
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+        this.fecha = fecha;
+        this.status = status;
+        this.autor = autor;
+        this.nombreCurso = nombreCurso;
     }
 
-    public void actualizar(DatosRegistroTopico datosRegistroTopico) {
-        this.titulo = datosRegistroTopico.titulo();
-        this.mensaje = datosRegistroTopico.mensaje();
-        this.autor = datosRegistroTopico.autor();
-        this.curso = datosRegistroTopico.curso();
-        this.fecha = datosRegistroTopico.fecha();
-        this.status = datosRegistroTopico.status();
+    public void actualizar(DatosActualizarTopico datosActualizarTopico) {
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if (datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+        if (datosActualizarTopico.nombreCurso() != null) {
+            this.nombreCurso = datosActualizarTopico.nombreCurso();
+        }
     }
 }

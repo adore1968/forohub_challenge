@@ -2,24 +2,24 @@ package com.forohub.forohub.domain.topicos;
 
 import java.time.LocalDateTime;
 
-public record DatosDetallesTopico(
+public record DatosListadoTopico(
         Long id,
         String titulo,
         String mensaje,
-        LocalDateTime fecha,
         Estado status,
-        Long autorId,
-        String nombreCurso
+        String autor,
+        String nombreCurso,
+        LocalDateTime fecha
 ) {
-    public DatosDetallesTopico(Topico topico) {
+    public DatosListadoTopico(Topico topico) {
         this(
                 topico.getId(),
                 topico.getTitulo(),
                 topico.getMensaje(),
-                topico.getFecha(),
                 topico.getStatus(),
-                topico.getAutor().getId(),
-                topico.getNombreCurso()
+                topico.getAutor().getLogin(),
+                topico.getNombreCurso(),
+                topico.getFecha()
         );
     }
 }

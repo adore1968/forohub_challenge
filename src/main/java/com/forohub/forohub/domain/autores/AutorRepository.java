@@ -1,10 +1,10 @@
-package com.forohub.forohub.domain.usuarios;
+package com.forohub.forohub.domain.autores;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface AutorRepository extends JpaRepository<Autor, Long> {
     UserDetails findByLogin(String username);
 }

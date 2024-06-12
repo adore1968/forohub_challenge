@@ -1,4 +1,4 @@
-package com.forohub.forohub.domain.usuarios;
+package com.forohub.forohub.domain.autores;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,18 +12,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Entity(name = "Usuario")
-@Table(name = "usuarios")
+@Entity(name = "Autor")
+@Table(name = "autores")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario implements UserDetails {
+public class Autor implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
-    private String password;
+    private String clave;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,7 +37,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return clave;
     }
 
     @Override

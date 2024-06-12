@@ -11,12 +11,10 @@ public record DatosRegistroTopico(
         @NotBlank
         String mensaje,
         @NotNull
-        LocalDateTime fecha,
+        Estado status,
+        @NotNull
+        Long autorId,
         @NotBlank
-        String status,
-        @NotBlank
-        String autor,
-        @NotBlank
-        String curso
+        String nombreCurso
 ) {
 }

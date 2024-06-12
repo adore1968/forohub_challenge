@@ -1,6 +1,6 @@
 package com.forohub.forohub.infra.security;
 
-import com.forohub.forohub.domain.usuarios.UsuarioRepository;
+import com.forohub.forohub.domain.autores.AutorRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private AutorRepository autorRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var JWTtoken = bearerToken.replace("Bearer ", "");
             var subject = tokenService.getSubject(JWTtoken);
             if (subject != null) {
-                var usuario = usuarioRepository.findByLogin(subject);
+                var usuario = autorRepository.findByLogin(subject);
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

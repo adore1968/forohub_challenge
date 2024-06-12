@@ -4,7 +4,8 @@ create table topicos(
     mensaje varchar(300) not null unique,
     fecha datetime not null,
     status varchar(100) not null,
-    autor varchar(100) not null,
-    curso varchar(100) not null,
-    primary key(id)
+    autor_id bigint not null,
+    nombre_curso varchar(14) not null,
+    primary key(id),
+    constraint fk_topicos_autor_id foreign key(autor_id) references autores(id)
 );

@@ -1,14 +1,13 @@
-package com.forohub.forohub.domain.usuarios;
+package com.forohub.forohub.domain.autores;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-public record DatosAutenticacionUsuario(
+public record DatosAutenticacionAutor(
         @NotBlank
         @Email
         String login,
         @NotBlank
-        String password
+        String clave
 ) {
 }
