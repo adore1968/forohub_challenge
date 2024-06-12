@@ -4,6 +4,8 @@ import com.forohub.forohub.domain.autores.Autor;
 import com.forohub.forohub.domain.autores.DatosAutenticacionAutor;
 import com.forohub.forohub.infra.security.DatosJWTtoken;
 import com.forohub.forohub.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,11 @@ public class LoginController {
     @Autowired
     private TokenService tokenService;
 
+    @Tag(name = "post", description = "Metodos POST de API de topicos")
+    @Operation(
+            summary = "Autenticar usuario",
+            description = "Autenticar usuario y obtener su JWT. Se requiere enviar el campo login y clave para poder autenticarse"
+    )
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionAutor datosAutenticacionAutor) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionAutor.login(), datosAutenticacionAutor.clave());
