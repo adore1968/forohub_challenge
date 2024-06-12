@@ -66,6 +66,18 @@ public class TopicoController {
 
     @Tag(name = "get", description = "Metodos GET de API de topicos")
     @Operation(
+            summary = "Listar topicos por nombre de curso y año",
+            description = "Listar topicos por nombre de curso y año especifico con criterios de busqueda. La respuesta es una lista de topicos con su respectivo id, titulo, mensaje, status, autor, nombreCurso y fecha"
+    )
+    @GetMapping("/filtrar2")
+    public ResponseEntity listarTopicosPorNombreCursoYAño(@RequestParam String curso, @RequestParam Integer año, Pageable pageable) {
+        var topicos = topicoRepository.findByNombreCursoAndFechaAño(curso, año, pageable)
+                .map(DatosListadoTopico::new);
+        return ResponseEntity.ok(topicos);
+    }
+
+    @Tag(name = "get", description = "Metodos GET de API de topicos")
+    @Operation(
             summary = "Detallar un topico",
             description = "Detallar un topico especifico por su id. La respuesta es un objeto con su respectivo id, titulo, mensaje, status, autor, nombreCurso y fecha"
     )
