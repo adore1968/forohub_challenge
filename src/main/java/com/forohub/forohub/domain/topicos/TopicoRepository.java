@@ -13,5 +13,5 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Boolean existsByTituloAndMensaje(String titulo, String mensaje);
 
     @Query("SELECT t FROM Topico t WHERE t.nombreCurso = :curso AND FUNCTION('YEAR', t.fecha) = :año")
-    Page<Topico> findByNombreCursoAndFechaAño(@Param("curso") String curso, @Param("año") Integer año, Pageable pageable);
+    Topico findByNombreCursoAndFechaAño(@Param("curso") String curso, @Param("año") Integer año);
 }

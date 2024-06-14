@@ -1,6 +1,7 @@
 package com.forohub.forohub.domain.topicos;
 
 import com.forohub.forohub.domain.autores.Autor;
+import com.forohub.forohub.domain.topicos.dto.DatosActualizarTopico;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

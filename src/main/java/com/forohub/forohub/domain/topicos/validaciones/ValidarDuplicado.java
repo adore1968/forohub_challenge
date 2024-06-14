@@ -1,6 +1,6 @@
 package com.forohub.forohub.domain.topicos.validaciones;
 
-import com.forohub.forohub.domain.topicos.DatosRegistroTopico;
+import com.forohub.forohub.domain.topicos.dto.DatosRegistroTopico;
 import com.forohub.forohub.domain.topicos.TopicoRepository;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;

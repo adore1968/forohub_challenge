@@ -1,4 +1,7 @@
-package com.forohub.forohub.domain.topicos;
+package com.forohub.forohub.domain.topicos.dto;
+
+import com.forohub.forohub.domain.topicos.Estado;
+import com.forohub.forohub.domain.topicos.Topico;
 
 import java.time.LocalDateTime;
 

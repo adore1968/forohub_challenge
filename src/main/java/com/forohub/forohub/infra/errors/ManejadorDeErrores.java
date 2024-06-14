@@ -1,7 +1,6 @@
-package com.forohub.forohub.infra.errores;
+package com.forohub.forohub.infra.errors;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

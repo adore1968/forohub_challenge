@@ -1,4 +1,4 @@
-package com.forohub.forohub.domain.topicos;
+package com.forohub.forohub.domain.topicos.dto;
 
 public record DatosActualizarTopico(
         String titulo,

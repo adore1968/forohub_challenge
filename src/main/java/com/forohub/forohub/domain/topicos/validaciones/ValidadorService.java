@@ -1,7 +1,11 @@
-package com.forohub.forohub.domain.topicos;
+package com.forohub.forohub.domain.topicos.validaciones;
 
 import com.forohub.forohub.domain.autores.AutorRepository;
+import com.forohub.forohub.domain.topicos.Topico;
+import com.forohub.forohub.domain.topicos.TopicoRepository;
+import com.forohub.forohub.domain.topicos.dto.DatosRegistroTopico;
 import com.forohub.forohub.domain.topicos.validaciones.Validadores;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +42,14 @@ public class ValidadorService {
                 datosRegistroTopico.nombreCurso()
         );
         return topicoRepository.save(topico);
+    }
+
+    public Topico validarExistencia(Long id) {
+        var topicoOptional = topicoRepository.findById(id);
+        if (topicoOptional.isPresent()) {
+            var topico = topicoOptional.get();
+            return topico;
+        }
+        throw new EntityNotFoundException();
     }
 }

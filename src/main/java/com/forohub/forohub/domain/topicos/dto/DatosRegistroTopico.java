@@ -1,5 +1,6 @@
-package com.forohub.forohub.domain.topicos;
+package com.forohub.forohub.domain.topicos.dto;
 
+import com.forohub.forohub.domain.topicos.Estado;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

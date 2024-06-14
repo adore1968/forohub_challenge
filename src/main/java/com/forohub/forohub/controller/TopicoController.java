@@ -1,6 +1,8 @@
 package com.forohub.forohub.controller;
 
 import com.forohub.forohub.domain.topicos.*;
+import com.forohub.forohub.domain.topicos.dto.*;
+import com.forohub.forohub.domain.topicos.validaciones.ValidadorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -70,10 +72,17 @@ public class TopicoController {
             description = "Listar topicos por nombre de curso y año especifico con criterios de busqueda. La respuesta es una lista de topicos con su respectivo id, titulo, mensaje, status, autor, nombreCurso y fecha"
     )
     @GetMapping("/filtrar2")
-    public ResponseEntity listarTopicosPorNombreCursoYAño(@RequestParam String curso, @RequestParam Integer año, Pageable pageable) {
-        var topicos = topicoRepository.findByNombreCursoAndFechaAño(curso, año, pageable)
-                .map(DatosListadoTopico::new);
-        return ResponseEntity.ok(topicos);
+    public ResponseEntity listarTopicosPorNombreCursoYAño(@RequestParam String curso, @RequestParam Integer año) {
+        var topico = topicoRepository.findByNombreCursoAndFechaAño(curso, año);
+        return ResponseEntity.ok(new DatosRespuestaTopico(
+                topico.getId(),
+                topico.getTitulo(),
+                topico.getMensaje(),
+                topico.getStatus(),
+                topico.getAutor().getLogin(),
+                topico.getNombreCurso(),
+                topico.getFecha()
+        ));
     }
 
     @Tag(name = "get", description = "Metodos GET de API de topicos")
@@ -83,7 +92,7 @@ public class TopicoController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaTopico> detallarTopico(@PathVariable Long id) {
-        var topico = topicoRepository.getReferenceById(id);
+        var topico = validadorService.validarExistencia(id);
         return ResponseEntity.ok(new DatosRespuestaTopico(
                 topico.getId(),
                 topico.getTitulo(),
@@ -103,32 +112,26 @@ public class TopicoController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DatosRespuestaTopico> actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
-        var topicoOptional = topicoRepository.findById(id);
-        if (topicoOptional.isPresent()) {
-            var topico = topicoOptional.get();
-            topico.actualizar(datosActualizarTopico);
-            return ResponseEntity.ok(new DatosRespuestaTopico(
-                    topico.getId(),
-                    topico.getTitulo(),
-                    topico.getMensaje(),
-                    topico.getStatus(),
-                    topico.getAutor().getLogin(),
-                    topico.getNombreCurso(),
-                    topico.getFecha()
-            ));
-        }
-        return ResponseEntity.notFound().build();
+        var topico = validadorService.validarExistencia(id);
+        topico.actualizar(datosActualizarTopico);
+        return ResponseEntity.ok(new DatosRespuestaTopico(
+                topico.getId(),
+                topico.getTitulo(),
+                topico.getMensaje(),
+                topico.getStatus(),
+                topico.getAutor().getLogin(),
+                topico.getNombreCurso(),
+                topico.getFecha()
+        ));
     }
 
     @Tag(name = "delete", description = "Metodos DELETE de API de topicos")
     @Operation(summary = "Eliminar un topico")
     @DeleteMapping("/{id}")
     public ResponseEntity eliminarTopico(@PathVariable Long id) {
-        var topicoOptional = topicoRepository.findById(id);
-        if (topicoOptional.isPresent()) {
-            topicoRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        var topicoOptional = validadorService.validarExistencia(id);
+        topicoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+
     }
 }
